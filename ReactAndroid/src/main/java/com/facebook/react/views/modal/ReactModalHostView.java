@@ -292,7 +292,7 @@ public class ReactModalHostView extends ViewGroup
         new DialogInterface.OnKeyListener() {
           @Override
           public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-            if (event.getAction() == KeyEvent.ACTION_UP) {
+            // if (event.getAction() == KeyEvent.ACTION_UP) {
               // We need to stop the BACK button from closing the dialog by default so we capture
               // that
               // event and instead inform JS so that it can make the decision as to whether or not
@@ -313,10 +313,12 @@ public class ReactModalHostView extends ViewGroup
                 // menu
                 Activity currentActivity = ((ReactContext) getContext()).getCurrentActivity();
                 if (currentActivity != null) {
-                  return currentActivity.onKeyUp(keyCode, event);
+                  return currentActivity.dispatchKeyEvent(keyCode, event);
+                  // return currentActivity.onKeyUp(keyCode, event);
                 }
               }
-            }
+            // }
+
             return false;
           }
         });
